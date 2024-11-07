@@ -1,5 +1,5 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -36,18 +36,26 @@ export class RegisterComponent implements OnInit {
     private renderer: Renderer2
   ) {
     this.registerForm = this.fb.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      email: ['', [Validators.required, Validators.email]],
-      firstName: [''],
-      lastName: [''],
-      phoneNumber: [''],
-      address: ['']
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      firstName: new FormControl('', [Validators.required,]),
+      lastName: new FormControl('', [Validators.required,]),
+      phoneNumber: new FormControl('', [Validators.required,]),
+      address: new FormControl('', [Validators.required]),
     });
   }
 
   ngOnInit() {
     this.openRoleSelectionDialog();
+  }
+
+  ngAfterViewInit() {
+    if (this.selectedRole && this.usernameInput) {
+      setTimeout(() => {
+        this.usernameInput.nativeElement.focus();
+      }, 0);
+    }
   }
 
   openRoleSelectionDialog() {
@@ -63,9 +71,6 @@ export class RegisterComponent implements OnInit {
 
       if (result) {
         this.selectedRole = result;
-        setTimeout(() => {
-          this.usernameInput.nativeElement.focus();
-        }, 0);
       } else {
         this.router.navigate(['/']);
       }
@@ -87,17 +92,19 @@ export class RegisterComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-
   onSubmit() {
-    if (this.registerForm.valid && this.selectedRole && this.selectedImage) {
-      const formData = new FormData();
-      Object.keys(this.registerForm.value).forEach(key => {
-        formData.append(key, this.registerForm.get(key)?.value);
-      });
+    if (this.registerForm.valid && this.selectedRole) {
+      // Use the selected image if available, or set a default image URL
+      const imageUrl = 'https://example.com/default-image.jpg'; // Replace with actual default URL
 
-      formData.append('role', this.selectedRole);
-      formData.append('profileImage', this.selectedImage);
+      // Prepare the data to be sent, including the role and profile image URL
+      const formData = {
+        ...this.registerForm.value,  // Spread form values
+        role: this.selectedRole,     // Append the selected role
+        profileImageUrl: imageUrl    // Use the image preview or default image URL
+      };
 
+      // Send the form data to the backend for registration
       this.registerService.registerUser(formData).subscribe(
         (response: any) => {
           this.snackBar.open('Registration successful!', 'Close', { duration: 3000 });
@@ -112,4 +119,4 @@ export class RegisterComponent implements OnInit {
       this.snackBar.open('Please fill out the form correctly and select a role and image', 'Close', { duration: 3000 });
     }
   }
-}
+}  

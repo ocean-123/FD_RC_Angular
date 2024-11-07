@@ -1,7 +1,9 @@
 .register-container {
     display: flex;
     height: 100vh;
-    background-color: #f0f4f8;
+    background-color: #1D1F21;
+    ;
+    ;
 }
 
 .register-image {
@@ -55,7 +57,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: -1rem;
+    padding: 1rem;
+    color: white;
+    /* Changed from -1rem to 1rem */
 }
 
 mat-card {
@@ -64,9 +68,14 @@ mat-card {
     padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
+    background-color: #1D1F21;
     transition: all 0.3s ease;
-    height: 100vh;
+    height: auto;
+    /* Changed from 100vh to auto */
+    max-height: 90vh;
+    /* Added max-height */
+    overflow-y: auto;
+    /* Added overflow-y */
 }
 
 mat-card:hover {
@@ -90,6 +99,7 @@ form {
     display: flex;
     flex-direction: column;
     gap: 1.3rem;
+
 }
 
 mat-form-field {
@@ -107,7 +117,6 @@ mat-form-field {
 .button-container {
     display: flex;
     justify-content: center;
-
 }
 
 button[type="submit"] {

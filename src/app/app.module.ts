@@ -18,6 +18,21 @@ import { RoleSelectionDialogComponent } from './components/role-selection-dialog
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatListModule } from '@angular/material/list';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { HomeComponent } from './components/home/home.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { ProfileComponent } from './component/profile/profile/profile.component';
 
 
 @NgModule({
@@ -25,7 +40,11 @@ import { MatListModule } from '@angular/material/list';
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    RoleSelectionDialogComponent
+    RoleSelectionDialogComponent,
+    DashboardComponent,
+    HomeComponent,
+    ForgetPasswordComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +60,20 @@ import { MatListModule } from '@angular/material/list';
     MatSelectModule,
     MatDialogModule,
     MatRadioModule,
-    MatListModule
+    MatListModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatTableModule,
+    MatGridListModule,
+    MatIconModule,
+    MatMenuModule,
+    MatBadgeModule,
+    MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule
+
+
 
   ],
   providers: [],

@@ -1,0 +1,165 @@
+<div class="food-waste-management">
+    <!-- Navigation -->
+    <mat-toolbar color="primary" class="nav-toolbar">
+      <img src="../../../assets/output-onlinepngtools.png" alt="Logo" class="logo" width="100px">
+      <div class="nav-links">
+        <button mat-button (click)="navigateTo('home')">Home</button>
+        <button mat-button (click)="navigateTo('about')">About</button>
+        <button mat-button (click)="navigateTo('contact')">Contact</button>
+      </div>
+      <button mat-raised-button color="accent" (click)="navigateTo('donate')">Donate</button>
+    </mat-toolbar>
+
+    <!-- Home Page -->
+    <section id="home" class="page-section" [class.active]="activeSection === 'home'">
+      <div class="slider-container">
+        <div class="slider">
+          <img *ngFor="let image of sliderImages; let i = index" 
+               [src]="image" 
+               [alt]="'Slider image ' + (i + 1)"
+               [class.active]="currentSlide === i">
+        </div>
+        <a href="login "> <button mat-raised-button color="primary" >Get Started   </button></a>
+      </div>
+
+      <h2>Latest News</h2>
+      <div class="news-cards">
+        <mat-card *ngFor="let news of latestNews">
+          <mat-card-header>
+            <mat-card-title>{{news.title}}</mat-card-title>
+          </mat-card-header>
+          <img mat-card-image [src]="news.image" [alt]="news.title">
+          <mat-card-content>
+            <p>{{news.content}}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <h2>Our Partners</h2>
+      <div class="partner-logos">
+        <img *ngFor="let partner of partners" [src]="partner.logo" [alt]="partner.name">
+      </div>
+
+      <h2>Blogs and Events</h2>
+      <div class="blog-event-cards">
+        <mat-card *ngFor="let item of blogsAndEvents">
+          <mat-card-header>
+            <mat-card-title>{{item.title}}</mat-card-title>
+            <mat-card-subtitle>{{item.type}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image [src]="item.image" [alt]="item.title">
+          <mat-card-content>
+            <p>{{item.description}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="primary">Read More</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page-section" [class.active]="activeSection === 'about'">
+        <h2>About Us</h2>
+        <div class="about-content">
+          <h3>Our Story</h3>
+          <div class="media-container">
+            <iframe [src]="sanitizeUrl('https://www.youtube.com/embed/our-story-video-id')" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p>Founded in 2020, our organization was born out of a passion to address the growing issue of food waste in our community. What began as a small group of concerned citizens has blossomed into a powerful movement. Our journey started when our founder, Jane Doe, witnessed the shocking amount of perfectly good food being discarded by local restaurants and supermarkets.</p>
+          <p>Driven by a desire to make a difference, Jane rallied a group of like-minded individuals, and together they formed our organization. From humble beginnings of rescuing food from a handful of local businesses, we've grown into a network of dedicated individuals and partner organizations committed to making a significant impact on food waste reduction.</p>
+          <p>Over the years, we've faced numerous challenges, from logistical hurdles to regulatory obstacles. However, each challenge has only strengthened our resolve and pushed us to innovate. Today, we're proud to say that we've rescued over 1 million pounds of food and provided countless meals to those in need.</p>
+  
+          <h3>What We Can Do</h3>
+          <img src="../../../assets/img-YJADHNk7hnB5FG4YyaWcx.jpeg" alt="Food waste reduction activities" class="section-image" height="500px">
+          <p>Our approach to tackling food waste is multi-faceted and innovative. At the core of our operations is our food rescue program. We've developed a sophisticated logistics network that connects surplus food from restaurants, supermarkets, and farms with local food banks, shelters, and community organizations.</p>
+          <p>Here's how we make a difference:</p>
+          <ul>
+            <li><strong>Food Rescue:</strong> Our team of volunteers collects excess food from businesses and redistributes it to those in need, ensuring that good food feeds people, not landfills.</li>
+            <li><strong>Education and Awareness:</strong> We conduct workshops and seminars to educate the public on reducing food waste at home. Our programs cover topics such as meal planning, proper food storage, and creative ways to use leftovers.</li>
+            <li><strong>Policy Advocacy:</strong> We work closely with local and state governments to advocate for policies that reduce food waste. This includes pushing for laws that make it easier for businesses to donate excess food and supporting initiatives that standardize food labeling to reduce confusion about expiration dates.</li>
+            <li><strong>Technology Solutions:</strong> We've developed a mobile app that connects food donors with nearby recipient organizations in real-time, streamlining the donation process and maximizing our impact.</li>
+            <li><strong>Community Composting:</strong> For food that can't be rescued, we've set up community composting sites, turning waste into valuable resources for local gardens and farms.</li>
+          </ul>
+  
+          <h3>Our Motto</h3>
+          <div class="media-container">
+            <iframe [src]="sanitizeUrl('https://www.youtube.com/embed/our-motto-video-id')" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p>"Waste Not, Want Not: Nourishing Communities, Sustaining the Planet"</p>
+          <p>This motto encapsulates our core beliefs and drives everything we do:</p>
+          <ul>
+            <li><strong>Waste Not:</strong> We believe that every bit of food has value. By reducing waste, we're not only feeding people but also conserving the resources that went into producing that food.</li>
+            <li><strong>Want Not:</strong> Our goal is to create a world where no one goes hungry while good food goes to waste. We strive to meet the immediate needs of our community while working towards long-term food security.</li>
+            <li><strong>Nourishing Communities:</strong> Food is more than sustenance; it's a way to bring people together. By redistributing food, we're not just feeding individuals, but strengthening community bonds.</li>
+            <li><strong>Sustaining the Planet:</strong> Food waste is a major contributor to climate change. By reducing it, we're playing our part in creating a more sustainable future for our planet.</li>
+          </ul>
+  
+          <h3>Careers</h3>
+          <img src="/assets/careers.jpg" alt="Team working together" class="section-image">
+          <p>Join our dynamic team and be part of the solution to food waste. We're always on the lookout for passionate individuals who share our vision of a world without food waste. Our team is diverse, innovative, and committed to making a real difference.</p>
+          <p>We offer exciting opportunities in various fields:</p>
+          <ul>
+            <li><strong>Logistics and Operations:</strong> Help optimize our food rescue and distribution networks.</li>
+            <li><strong>Community Outreach:</strong> Engage with local businesses, organizations, and individuals to expand our impact.</li>
+            <li><strong>Technology:</strong> Develop and maintain the digital tools that power our operations.</li>
+            <li><strong>Education:</strong> Create and deliver programs that inspire others to reduce food waste.</li>
+            <li><strong>Policy and Advocacy:</strong> Work on initiatives to create systemic change in how our society handles food waste.</li>
+          </ul>
+          <p>Working with us means more than just a job. It's an opportunity to be at the forefront of the fight against food waste, to innovate, to learn, and to make a tangible impact on your community and the environment. We offer competitive salaries, a flexible work environment, and the satisfaction of knowing that your work is making the world a better place.</p>
+          <p>Check our careers page for current openings and help us make a lasting impact on our community and environment. Together, we can create a future where no good food goes to waste!</p>
+        </div>
+      </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page-section" [class.active]="activeSection === 'contact'">
+      <h2>Contact Us</h2>
+      <div class="contact-container">
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required type="email">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Message</mat-label>
+            <textarea matInput formControlName="message" required rows="4"></textarea>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!contactForm.valid">Send Message</button>
+        </form>
+        <div class="map-container">
+          <div #mapContainer class="map"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donation Page -->
+    <section id="donate" class="page-section" [class.active]="activeSection === 'donate'">
+      <h2>Make a Donation</h2>
+      <div class="donation-container">
+        <form [formGroup]="donationForm" (ngSubmit)="onDonate()" class="donation-form">
+          <mat-form-field appearance="fill">
+            <mat-label>Amount</mat-label>
+            <input matInput formControlName="amount" required type="number">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" required>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" required type="email">
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!donationForm.valid">Donate with eSewa</button>
+        </form>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2023 Food Waste Management. All rights reserved.</p>
+      </footer>
+    </div>

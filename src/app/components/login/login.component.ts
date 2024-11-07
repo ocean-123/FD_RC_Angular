@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+
 import { LoginService } from 'src/app/service/loginService/login.service';
+import { AuthenticateService } from 'src/app/service/AuthS/authenticate.service';
+import { DemoserviceService } from 'src/app/service/demoservice.service';
+
 
 @Component({
   selector: 'app-login',
@@ -11,17 +15,24 @@ import { LoginService } from 'src/app/service/loginService/login.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  private authenticate: AuthenticateService;
+  private demoService: DemoserviceService;
+
 
   constructor(
     private fb: FormBuilder,
     private snackBar: MatSnackBar,
     private loginService: LoginService,
-    private router: Router
+    private router: Router,
+    authenticate: AuthenticateService,
+    demoService: DemoserviceService
   ) {
     this.loginForm = this.fb.group({
-      email: ['',],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
+    this.authenticate = authenticate;
+    this.demoService = demoService;
   }
 
   ngOnInit() {
@@ -35,13 +46,19 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           const token = response.token;
           const role = response.role;
+          const id = response.id;
 
           // Store the token and role in local storage
           localStorage.setItem('token', token);
           localStorage.setItem('role', role);
+          localStorage.setItem('id', id)
 
-          this.snackBar.open('Login successful!', 'Close', { duration: 3000 });
-          // this.router.navigate(['/register']);
+          this.authenticate.setAuthenticated(true);
+          this.demoService.setUserRole(role);
+          console.log(token);
+
+
+          this.router.navigate(['/dashboard'],);
 
         },
         (error: any) => {
@@ -52,5 +69,11 @@ export class LoginComponent implements OnInit {
     } else {
       this.snackBar.open('Please fill out the form correctly', 'Close', { duration: 3000 });
     }
+  }
+
+  loginWithGoogle() {
+    // Implement Google login logic here
+    console.log('Login with Google clicked');
+    this.snackBar.open('Google login not implemented yet', 'Close', { duration: 3000 });
   }
 }

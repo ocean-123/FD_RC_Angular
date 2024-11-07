@@ -18,14 +18,14 @@
           <form [formGroup]="loginForm"  (ngSubmit)="onSubmit()">
             <mat-form-field appearance="outline">
               <mat-label>Email</mat-label>
-              <input matInput type="text" required>
-              <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required</mat-error>
-              <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email</mat-error>
+              <input matInput type="text" formControlName="username" required>
+              <mat-error *ngIf="loginForm.get('username')?.hasError('required')">Email is required</mat-error>
+              <mat-error *ngIf="loginForm.get('username')?.hasError('username')">Please enter a valid email</mat-error>
             </mat-form-field>
             
             
             <mat-form-field appearance="outline">
-              <mat-label>Password</mat-label>
+              <mat-label >Password</mat-label>
               <input matInput type="password" formControlName="password" required>
               <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required</mat-error>
               <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 8 characters</mat-error>
@@ -36,10 +36,17 @@
             </div>
           </form>
           <br>
+          <div class="additional-options">
+            <button mat-raised-button color="accent" (click)="loginWithGoogle()">
+              <mat-icon>login</mat-icon> Login with Google
+            </button>
+            <a mat-button color="primary" routerLink="/forgot-password">Forgot Password?</a>
+          </div>
+          <br>
           <div>
-            <b>register here </b><a style="color: red;" href="/register">register</a>
+            <b>Don't have an account?</b> <a mat-button color="warn" routerLink="/register">Register here</a>
           </div>
         </mat-card-content>
       </mat-card>
     </div>
-  </div> 
+  </div>
